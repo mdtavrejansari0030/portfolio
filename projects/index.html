@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selected Work | Md Tavrej Ansari</title>
+  <meta name="description" content="A portfolio showcase of customer acquisition systems, tracking setups and landing page designs built by Md Tavrej Ansari.">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+  <global-navbar></global-navbar>
+
+  <main>
+    <!-- Page Hero Header -->
+    <header class="section-hero section pb-md" aria-label="Page Title Banner">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="/">Home</a>
+          <span class="breadcrumbs-separator"></span>
+          <span>Work</span>
+        </div>
+        <h1 style="margin-top: var(--space-sm);">Selected Work</h1>
+        <p class="max-w-prose" style="color: var(--color-text-secondary); margin-top: var(--space-xs);">
+          A portfolio showcase of conversion-focused landing pages, customer tracking setups and business growth marketing systems.
+        </p>
+      </div>
+    </header>
+
+    <!-- Search & Filter Controls -->
+    <section class="section pt-0 pb-lg" aria-label="Filters and Search Controls">
+      <div class="container">
+        <div class="search-filter-area" style="display: flex; flex-wrap: wrap; gap: var(--space-md); justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-md);">
+          <div class="search-bar-wrapper" style="position: relative; flex: 1; max-width: 400px;">
+            <input type="search" id="projects-search-input" class="search-input" placeholder="Search projects..." aria-label="Search Projects Input"
+              style="width: 100%; padding: var(--space-xs) var(--space-md) var(--space-xs) 2.5rem; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-text-primary); font-size: var(--font-size-sm);">
+            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--color-text-muted); font-size: 14px;">🔍</span>
+          </div>
+          <div class="filter-group" style="display: flex; gap: var(--space-xs);">
+            <button class="filter-pill active" data-projects-filter="all" style="background: var(--color-accent); color: var(--color-bg-primary); border: none; padding: 6px 14px; border-radius: var(--radius-full); font-size: var(--font-size-xxs); font-weight: var(--fw-semibold); cursor: pointer;">All Work</button>
+            <button class="filter-pill" data-projects-filter="CRO & UX" style="background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border); padding: 6px 14px; border-radius: var(--radius-full); font-size: var(--font-size-xxs); font-weight: var(--fw-semibold); cursor: pointer;">CRO & UX</button>
+            <button class="filter-pill" data-projects-filter="Growth Marketing" style="background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border); padding: 6px 14px; border-radius: var(--radius-full); font-size: var(--font-size-xxs); font-weight: var(--fw-semibold); cursor: pointer;">Growth Marketing</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Cards Grid -->
+    <section class="section pt-0" aria-label="Projects Grid Content">
+      <div class="container">
+        <div class="grid-12" id="projects-list-grid" style="gap: var(--grid-gap);">
+          <!-- Dynamic Content loaded by cms-loader.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <global-footer></global-footer>
+
+  <script src="/js/components.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="../data/db.js"></script>
+  <script src="/js/cms-loader.js"></script>
+</body>
+</html>

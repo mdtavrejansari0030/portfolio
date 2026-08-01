@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[Articles] | Md Tavrej Ansari</title>
+  <meta name="description" content="[SEO Page Meta Description: Editorial publication catalog. Modern articles, technical papers and industry perspectives ready for CMS connection.]">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+  <global-navbar></global-navbar>
+
+  <main>
+    <!-- Page Hero Header -->
+    <header class="section-hero section pb-md" aria-label="Page Title Header">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="/">Home</a>
+          <span class="breadcrumbs-separator"></span>
+          <span>Articles</span>
+        </div>
+        <h1 class="hero-title" style="margin-top: var(--space-sm);">Insights & Learnings</h1>
+        <p class="max-w-prose" style="color: var(--color-text-secondary); margin-top: var(--space-xs);">
+          Thoughts, guides and strategic breakdowns of acquisition systems, customer psychology and tracking setups.
+        </p>
+      </div>
+    </header>
+
+    <!-- Featured Article Banner -->
+    <section class="section pt-0 pb-lg" aria-label="Featured Article Highlight">
+      <div class="container">
+        <article class="grid-12" style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden; align-items: center; gap: 0;">
+          <div style="grid-column: span 12; height: 100%; min-height: 250px; display: flex; align-items: center; justify-content: center; background-color: var(--color-bg-tertiary);" class="skeleton-media-box ratio-landscape">
+            <span class="skeleton-label">Featured Article: Marketing Systems</span>
+          </div>
+          <div style="grid-column: span 12; padding: var(--space-xl);" class="flow flow-sm">
+            <div class="card-meta">
+              <span class="badge">Featured Article</span>
+              <span class="badge">31 July 2026</span>
+              <span class="badge">5 min read</span>
+            </div>
+            <h2 class="card-title" style="font-size: var(--font-size-lg); font-weight: bold; margin-top: var(--space-xxs);">Why Most Businesses Don't Have a Marketing Problem - They Have a Systems Problem</h2>
+            <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: var(--lh-body);">
+              Most businesses don't struggle because of poor marketing - they struggle because of disconnected systems. This article explores how landing pages, customer journeys, conversion tracking and continuous optimization work together to build sustainable business growth.
+            </p>
+            <div class="flex-group mt-sm">
+              <span class="tag-pill">Marketing Systems</span>
+              <span class="tag-pill">CRO Strategy</span>
+            </div>
+            <div style="margin-top: var(--space-md);">
+              <a href="/article" class="btn btn-primary">Read Featured Article</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Search & Filters -->
+    <section class="section pt-0 pb-lg" aria-label="Filters and Category Grouping">
+      <div class="container">
+        <div class="search-filter-area" style="display: flex; flex-wrap: wrap; gap: var(--space-md); justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-md);">
+          <div class="search-bar-wrapper" style="position: relative; flex: 1; max-width: 400px;">
+            <input type="search" id="articles-search-input" class="search-input" placeholder="Search Articles..." aria-label="Search Articles Input"
+              style="width: 100%; padding: var(--space-xs) var(--space-md) var(--space-xs) 2.5rem; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-text-primary); font-size: var(--font-size-sm);">
+            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--color-text-muted); font-size: 14px;">🔍</span>
+          </div>
+          <div class="filter-group" style="display: flex; gap: var(--space-xs);">
+            <button class="filter-pill active" data-articles-filter="all" style="background: var(--color-accent); color: var(--color-bg-primary); border: none; padding: 6px 14px; border-radius: var(--radius-full); font-size: var(--font-size-xxs); font-weight: var(--fw-semibold); cursor: pointer;">All Subjects</button>
+            <button class="filter-pill" data-articles-filter="Acquisition" style="background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border); padding: 6px 14px; border-radius: var(--radius-full); font-size: var(--font-size-xxs); font-weight: var(--fw-semibold); cursor: pointer;">Acquisition</button>
+            <button class="filter-pill" data-articles-filter="Analytics" style="background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border); padding: 6px 14px; border-radius: var(--radius-full); font-size: var(--font-size-xxs); font-weight: var(--fw-semibold); cursor: pointer;">Analytics</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="section pt-0" aria-label="Articles Grid List">
+      <div class="container">
+        <div class="grid-12" id="articles-list-grid" style="gap: var(--grid-gap);">
+          <!-- Dynamic Content loaded by cms-loader.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <global-footer></global-footer>
+
+  <script src="/js/components.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="../data/db.js"></script>
+  <script src="/js/cms-loader.js"></script>
+</body>
+</html>

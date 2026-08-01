@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS Admin Dashboard | Md Tavrej Ansari</title>
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+
+<body
+  style="background-color: var(--color-bg-primary); color: var(--color-text-primary); margin: 0; font-family: var(--font-body);">
+
+  <!-- Login Modal Overlay -->
+  <div id="login-overlay" class="overlay-modal" style="display: flex;">
+    <div class="login-card">
+      <h2
+        style="font-family: var(--font-heading); font-size: var(--font-size-xl); margin-bottom: var(--space-xs); font-weight: var(--fw-bold); text-align: center;">
+        CMS Login</h2>
+      <p
+        style="font-size: var(--font-size-xs); color: var(--color-text-secondary); text-align: center; margin-bottom: var(--space-md);">
+        Click below to enter your portfolio admin dashboard.</p>
+
+      <form id="login-form" class="flow flow-sm">
+        <button type="submit" class="btn btn-primary w-full" style="margin-top: var(--space-sm);">Access
+          Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Layout -->
+  <div id="dashboard-wrapper" style="display: none; min-height: 100vh;">
+
+    <!-- Header Navbar -->
+    <header class="admin-header"
+      style="background: var(--color-bg-secondary); border-bottom: 1px solid var(--color-border); padding: var(--space-sm) var(--space-lg); display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: var(--space-sm);">
+        <span
+          style="font-family: var(--font-heading); font-weight: var(--fw-bold); font-size: var(--font-size-md);">Portfolio
+          CMS</span>
+        <span class="badge"
+          style="font-size: var(--font-size-xxs); background: var(--color-bg-tertiary); color: var(--color-text-secondary);">v1.0.0</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: var(--space-md);">
+        <span id="user-display" style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">Admin
+          Session</span>
+        <button id="logout-btn" class="btn btn-text"
+          style="font-size: var(--font-size-xxs); color: var(--color-error); border: 1px solid rgba(255, 51, 102, 0.2); padding: 4px 10px; border-radius: var(--radius-xs);">Log
+          Out</button>
+      </div>
+    </header>
+
+    <div class="admin-container"
+      style="display: flex; flex-direction: column; gap: var(--space-lg); padding: var(--space-lg); max-width: 1440px; margin: 0 auto; width: 100%;">
+
+      <!-- Metrics Overview Cards -->
+      <section id="metrics-section" class="grid-12" style="gap: var(--grid-gap);">
+        <div class="col-span-12 col-span-4 col-span-2 metric-card card">
+          <div class="metric-label">📚 Total Articles</div>
+          <div id="metric-articles-count" class="metric-value">0</div>
+          <div class="metric-footer" id="metric-articles-sub">0 Published · 0 Drafts</div>
+        </div>
+        <div class="col-span-12 col-span-4 col-span-2 metric-card card">
+          <div class="metric-label">📁 Case Studies</div>
+          <div id="metric-cases-count" class="metric-value">0</div>
+          <div class="metric-footer" id="metric-cases-sub">0 Published</div>
+        </div>
+        <div class="col-span-12 col-span-4 col-span-2 metric-card card">
+          <div class="metric-label">💼 Projects</div>
+          <div id="metric-projects-count" class="metric-value">0</div>
+          <div class="metric-footer" id="metric-projects-sub">0 Published</div>
+        </div>
+        <div class="col-span-12 col-span-4 col-span-2 metric-card card">
+          <div class="metric-label">📦 Resources</div>
+          <div id="metric-resources-count" class="metric-value">0</div>
+          <div class="metric-footer" id="metric-resources-sub">0 Published</div>
+        </div>
+        <div class="col-span-12 col-span-4 col-span-2 metric-card card">
+          <div class="metric-label">📈 Total Views</div>
+          <div id="metric-views-count" class="metric-value">0</div>
+          <div class="metric-footer" id="metric-views-clicks">0 Clicks (Avg 0%)</div>
+        </div>
+        <div class="col-span-12 col-span-4 col-span-2 metric-card card">
+          <div class="metric-label">⚡ Avg Read Time</div>
+          <div id="metric-readtime-count" class="metric-value">0 min</div>
+          <div class="metric-footer">Across all publications</div>
+        </div>
+      </section>
+
+      <!-- Sidebar and Catalog Section Split -->
+      <div class="grid-12" style="gap: var(--grid-gap); align-items: start;">
+
+        <!-- Left Side: Catalog Content list -->
+        <main class="col-span-12 col-span-8 card"
+          style="background: var(--color-bg-secondary); border: 1px solid var(--color-border); padding: var(--space-md); border-radius: var(--radius-sm);">
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); flex-wrap: wrap; gap: var(--space-xs);">
+            <h2
+              style="font-family: var(--font-heading); font-size: var(--font-size-lg); font-weight: var(--fw-bold); margin: 0; color: var(--color-text-primary);">
+              Content Catalog</h2>
+            <div style="display: flex; gap: var(--space-xs); align-items: center;">
+              <select id="catalog-type-filter" class="form-input"
+                style="padding: 4px 8px; font-size: var(--font-size-xs); background: var(--color-bg-primary);">
+                <option value="all">All Types</option>
+                <option value="articles">Articles</option>
+                <option value="case_studies">Case Studies</option>
+                <option value="projects">Projects</option>
+                <option value="resources">Resources</option>
+              </select>
+              <button id="new-content-btn" class="btn btn-primary"
+                style="font-size: var(--font-size-xs); padding: 6px 12px;">+ Create New</button>
+            </div>
+          </div>
+
+          <!-- Catalog List Container -->
+          <div class="table-responsive">
+            <table class="catalog-table"
+              style="width: 100%; border-collapse: collapse; text-align: left; font-size: var(--font-size-xs);">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--color-border); color: var(--color-text-muted);">
+                  <th style="padding: var(--space-xs) 0;">Title</th>
+                  <th style="padding: var(--space-xs) var(--space-sm);">Type</th>
+                  <th style="padding: var(--space-xs) var(--space-sm);">Status</th>
+                  <th style="padding: var(--space-xs) var(--space-sm);">Last Updated</th>
+                  <th style="padding: var(--space-xs) 0; text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="catalog-list-tbody">
+                <!-- Populate dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </main>
+
+        <!-- Right Side: Toolsets & Media Library Panel -->
+        <aside class="col-span-12 col-span-4 stack-group" style="gap: var(--space-lg);">
+
+          <!-- Media Library Upload Card -->
+          <div class="card"
+            style="background: var(--color-bg-secondary); border: 1px solid var(--color-border); padding: var(--space-md); border-radius: var(--radius-sm);">
+            <h3
+              style="font-family: var(--font-heading); font-size: var(--font-size-md); font-weight: var(--fw-bold); margin: 0 0 var(--space-sm) 0; color: var(--color-text-primary);">
+              🖼� <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                <label class="media-upload-area"
+                  style="border: 2px dashed var(--color-border); padding: var(--space-md); text-align: center; border-radius: var(--radius-xs); cursor: pointer; display: block; background: var(--color-bg-primary); transition: var(--transition-fast);">
+                  <input type="file" id="media-file-input" accept="image/*" style="display: none;">
+                  <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">Click to choose file
+                  </div>
+                  <div style="font-size: 10px; color: var(--color-text-muted); margin-top: 4px;">PNG, JPG, WEBP, or SVG
+                  </div>
+                </label>
+
+                <!-- Upload Preview Container -->
+                <div id="media-preview-container"
+                  style="display: none; border: 1px dashed var(--color-accent); padding: var(--space-sm); border-radius: var(--radius-xs); text-align: center; background: var(--color-bg-primary);">
+                  <img id="media-preview-img"
+                    style="max-height: 100px; max-width: 100%; border-radius: var(--radius-xs); margin-bottom: var(--space-xs);" />
+                  <div style="display: flex; gap: var(--space-xs); justify-content: center;">
+                    <button id="media-upload-confirm-btn" class="btn btn-primary"
+                      style="font-size: 8px; padding: 4px 10px;">Upload File</button>
+                    <button id="media-upload-cancel-btn" class="btn btn-secondary"
+                      style="font-size: 8px; padding: 4px 10px;">Cancel</button>
+                  </div>
+                </div>
+
+                <!-- Gallery List -->
+                <div id="media-gallery"
+                  style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; max-height: 180px; overflow-y: auto; padding-right: 4px;">
+                  <!-- Populate dynamically -->
+                </div>
+              </div>
+          </div>
+
+          <!-- Blogger/Wordpress Settings Card -->
+          <div class="card"
+            style="background: var(--color-bg-secondary); border: 1px solid var(--color-border); padding: var(--space-md); border-radius: var(--radius-sm);">
+            <h3
+              style="font-family: var(--font-heading); font-size: var(--font-size-md); font-weight: var(--fw-bold); margin: 0 0 var(--space-sm) 0; color: var(--color-text-primary);">
+              ⚙️ Site & Theme Settings</h3>
+            <div class="flow flow-sm" style="font-size: var(--font-size-xs);">
+              <div class="form-group">
+                <label class="form-label" style="font-size: 9px;">Site Title (SEO)</label>
+                <input type="text" id="settings-site-title" class="form-input"
+                  style="width: 100%; padding: 5px; background: var(--color-bg-primary);">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 9px;">Site Meta Description</label>
+                <textarea id="settings-site-desc" class="form-input"
+                  style="width: 100%; padding: 5px; height: 50px; background: var(--color-bg-primary); resize: vertical;"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 9px;">Author Name</label>
+                <input type="text" id="settings-author" class="form-input"
+                  style="width: 100%; padding: 5px; background: var(--color-bg-primary);">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 9px;">Author Headline / Bio</label>
+                <textarea id="settings-author-bio" class="form-input"
+                  style="width: 100%; padding: 5px; height: 50px; background: var(--color-bg-primary); resize: vertical;"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 9px;">Brand Theme Color</label>
+                <div style="display: flex; gap: var(--space-xs); align-items: center;">
+                  <input type="color" id="settings-brand-color"
+                    style="border: none; padding: 0; width: 30px; height: 24px; background: transparent; cursor: pointer;">
+                  <span style="font-size: 10px; color: var(--color-text-muted);">Pick accent color</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 9px;">LinkedIn Profile URL</label>
+                <input type="url" id="settings-linkedin" class="form-input"
+                  style="width: 100%; padding: 5px; background: var(--color-bg-primary);">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 9px;">GitHub Profile URL</label>
+                <input type="url" id="settings-github" class="form-input"
+                  style="width: 100%; padding: 5px; background: var(--color-bg-primary);">
+              </div>
+              <button id="settings-save-btn" class="btn btn-primary w-full" style="font-size: 10px; padding: 8px;">Save
+                Settings</button>
+            </div>
+          </div>
+      </div>
+    </div>
+    </aside>
+  </div>
+  </div>
+  </div>
+
+  <!-- Content Editor Modal Drawer (Full Page overlay) -->
+  <div id="editor-drawer" class="drawer-modal" style="display: none;">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <h2 id="editor-title"
+          style="font-family: var(--font-heading); font-size: var(--font-size-lg); font-weight: var(--fw-bold); margin: 0;">
+          Create New Publication</h2>
+        <div style="display: flex; gap: var(--space-sm);">
+          <button id="editor-close-btn" class="btn btn-text"
+            style="border: 1px solid var(--color-border); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-xs);">Cancel</button>
+          <button id="editor-save-draft-btn" class="btn btn-secondary"
+            style="padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-xs);">Save Draft</button>
+          <button id="editor-publish-btn" class="btn btn-primary"
+            style="padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-xs);">Publish Now</button>
+        </div>
+      </div>
+
+      <div class="drawer-body grid-12"
+        style="gap: var(--grid-gap); padding: var(--space-lg); overflow-y: auto; max-height: calc(100vh - 80px);">
+
+        <!-- Editor Content (Left Column) -->
+        <div class="col-span-12 col-span-8 flow flow-md">
+          <!-- Primary Fields -->
+          <div class="grid-12" style="gap: var(--space-sm);">
+            <div class="col-span-12 col-span-8 form-group">
+              <label for="post-title-input" class="form-label">Title</label>
+              <input type="text" id="post-title-input" class="form-input" placeholder="Enter headline title..." required
+                style="width: 100%;">
+            </div>
+            <div class="col-span-12 col-span-4 form-group">
+              <label for="post-type-select" class="form-label">Type</label>
+              <select id="post-type-select" class="form-input" style="width: 100%;">
+                <option value="articles">Article</option>
+                <option value="case_studies">Case Study</option>
+                <option value="projects">Project</option>
+                <option value="resources">Resource</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-12" style="gap: var(--space-sm);">
+            <div class="col-span-12 col-span-6 form-group">
+              <label for="post-category-input" class="form-label">Category</label>
+              <input type="text" id="post-category-input" class="form-input" placeholder="e.g. Analytics, E-Commerce"
+                required style="width: 100%;">
+            </div>
+            <div class="col-span-12 col-span-6 form-group">
+              <label for="post-tags-input" class="form-label">Tags (Comma separated)</label>
+              <input type="text" id="post-tags-input" class="form-input" placeholder="Google Ads, Landing Page, CRO"
+                style="width: 100%;">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="post-excerpt-input" class="form-label">Excerpt / Summary</label>
+            <textarea id="post-excerpt-input" class="form-input" placeholder="Brief summary of this item..."
+              style="width: 100%; height: 60px;"></textarea>
+          </div>
+
+          <!-- Rich Text Formatting Bar -->
+          <div class="form-group">
+            <label class="form-label">Content Body</label>
+            <div class="rich-format-bar">
+              <button type="button" data-cmd="h2" title="Heading 2">H2</button>
+              <button type="button" data-cmd="h3" title="Heading 3">H3</button>
+              <button type="button" data-cmd="p" title="Paragraph">Paragraph</button>
+              <button type="button" data-cmd="blockquote" title="Quote block">Quote</button>
+              <button type="button" data-cmd="ul" title="Unordered List">Bullet List</button>
+              <button type="button" data-cmd="table" title="Table grid">Table</button>
+              <button type="button" data-cmd="link" title="Insert hyperlink">Link</button>
+              <button type="button" data-cmd="btn" title="Call-To-Action Button">CTA Button</button>
+              <button type="button" data-cmd="callout" title="Callout highlight box">Callout</button>
+            </div>
+            <textarea id="post-content-textarea" class="form-input"
+              placeholder="Write HTML body content or use format bars..."
+              style="width: 100%; height: 350px; font-family: var(--font-mono); font-size: var(--font-size-xs); line-height: 1.5;"></textarea>
+            <div
+              style="display: flex; justify-content: space-between; font-size: 10px; color: var(--color-text-muted); margin-top: 4px;">
+              <span id="editor-word-count">Words: 0</span>
+              <span id="editor-read-time">Est. Read Time: 1 min</span>
+            </div>
+          </div>
+
+          <!-- Real-Time Content HTML Preview -->
+          <div
+            style="border: 1px solid var(--color-border); border-radius: var(--radius-xs); background: var(--color-bg-primary); padding: var(--space-md);">
+            <div
+              style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--space-sm);">
+              Live Content Preview</div>
+            <div id="content-preview-pane" class="flow"
+              style="min-height: 100px; font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+              <!-- preview rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- SEO Metadata Configuration (Right Column) -->
+        <div class="col-span-12 col-span-4 stack-group"
+          style="gap: var(--space-md); border-left: 1px solid var(--color-border); padding-left: var(--space-md);">
+          <div>
+            <h3
+              style="font-family: var(--font-heading); font-size: var(--font-size-md); font-weight: var(--fw-bold); margin: 0 0 var(--space-sm) 0; color: var(--color-text-primary);">
+              Search Engine Setup</h3>
+            <p style="font-size: 10px; color: var(--color-text-secondary); margin-bottom: var(--space-md);">Configure
+              SEO metadata, OpenGraph parameters, and target focus keywords.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="post-seo-title" class="form-label" style="font-size: 11px;">SEO Title</label>
+            <input type="text" id="post-seo-title" class="form-input" placeholder="e.g. Primary Keyword | Page Title"
+              style="width: 100%; font-size: var(--font-size-xs); padding: 6px;">
+          </div>
+
+          <div class="form-group">
+            <label for="post-seo-desc" class="form-label" style="font-size: 11px;">Meta Description</label>
+            <textarea id="post-seo-desc" class="form-input" placeholder="Brief target meta description..."
+              style="width: 100%; height: 70px; font-size: var(--font-size-xs); padding: 6px;"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="post-seo-keyword" class="form-label" style="font-size: 11px;">Focus Keyword</label>
+            <input type="text" id="post-seo-keyword" class="form-input" placeholder="e.g. Google Ads Setup"
+              style="width: 100%; font-size: var(--font-size-xs); padding: 6px;">
+          </div>
+
+          <div class="form-group">
+            <label for="post-seo-slug" class="form-label" style="font-size: 11px;">URL Slug</label>
+            <input type="text" id="post-seo-slug" class="form-input" placeholder="e.g. high-converting-landing-page"
+              style="width: 100%; font-size: var(--font-size-xs); padding: 6px;">
+          </div>
+
+          <div class="form-group">
+            <label for="post-seo-canonical" class="form-label" style="font-size: 11px;">Canonical URL Override</label>
+            <input type="text" id="post-seo-canonical" class="form-input" placeholder="Auto-generated if blank"
+              style="width: 100%; font-size: var(--font-size-xs); padding: 6px;">
+          </div>
+
+          <!-- Accordion for OpenGraph -->
+          <details
+            style="border: 1px solid var(--color-border); border-radius: var(--radius-xs); background: var(--color-bg-secondary); padding: 6px 10px;">
+            <summary style="font-size: 11px; font-weight: bold; cursor: pointer; color: var(--color-text-primary);">
+              Social Media Cards (OG)</summary>
+            <div class="flow flow-xs" style="margin-top: 6px; font-size: var(--font-size-xs);">
+              <div class="form-group">
+                <label class="form-label" style="font-size: 9px; margin-bottom: 2px;">OG Title</label>
+                <input type="text" id="post-og-title" class="form-input"
+                  style="width: 100%; padding: 4px; font-size: 11px;">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 9px; margin-bottom: 2px;">OG Description</label>
+                <textarea id="post-og-desc" class="form-input"
+                  style="width: 100%; height: 50px; font-size: 11px;"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size: 9px; margin-bottom: 2px;">Twitter Card Type</label>
+                <select id="post-twitter-card" class="form-input" style="width: 100%; padding: 4px; font-size: 11px;">
+                  <option value="summary_large_image">summary_large_image</option>
+                  <option value="summary">summary</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+          <!-- Accordion for FAQ Schema -->
+          <details
+            style="border: 1px solid var(--color-border); border-radius: var(--radius-xs); background: var(--color-bg-secondary); padding: 6px 10px;">
+            <summary style="font-size: 11px; font-weight: bold; cursor: pointer; color: var(--color-text-primary);">AEO
+              Schema (FAQ List)</summary>
+            <div class="flow flow-xs" style="margin-top: 6px; font-size: var(--font-size-xs);">
+              <div id="faq-schema-items" class="stack-group" style="gap: 6px;">
+                <!-- Add dynamic FAQ inputs here -->
+              </div>
+              <button type="button" id="faq-add-item-btn" class="btn btn-secondary w-full"
+                style="font-size: 9px; padding: 4px; margin-top: 6px;">+ Add FAQ Item</button>
+            </div>
+          </details>
+
+          <!-- SEO Health Score -->
+          <div
+            style="border: 1px solid var(--color-border); border-radius: var(--radius-xs); background: var(--color-bg-primary); padding: var(--space-sm);">
+            <div
+              style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 4px;">
+              SEO Score Checker</div>
+            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-top: 4px;">
+              <span id="seo-score-badge" class="badge"
+                style="font-size: var(--font-size-xs); background: var(--color-bg-tertiary); color: var(--color-success); border: 1px solid var(--color-success); font-family: var(--font-mono); font-weight: bold; padding: 4px 8px;">0
+                / 100</span>
+              <span id="seo-score-text" style="font-size: 10px; color: var(--color-text-secondary);">Needs title and
+                keyword checks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/admin/admin.js"></script>
+</body>
+
+</html>

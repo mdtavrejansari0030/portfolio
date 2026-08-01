@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Md Tavrej Ansari | Portfolio Feed</title>
+  <link>https://mdtavrej.com</link>
+  <description>Acquisition, tracking and performance marketing insights</description>
+  <atom:link href="https://mdtavrej.com/feed.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title>Why Most Businesses Don't Have a Marketing Problem - They Have a Systems Problem</title>
+    <link>https://mdtavrej.com/article/?slug=marketing-systems-problem</link>
+    <guid>https://mdtavrej.com/article/?slug=marketing-systems-problem</guid>
+    <pubDate>31 July 2026</pubDate>
+    <description>Most businesses don't struggle because of poor marketing - they struggle because of disconnected systems. This article explores how landing pages, conversion tracking and continuous optimization work together.</description>
+  </item>
+  <item>
+    <title>CRO Campaign for Spacia Interiors</title>
+    <link>https://mdtavrej.com/case-study/?slug=spacia-interiors-cro</link>
+    <guid>https://mdtavrej.com/case-study/?slug=spacia-interiors-cro</guid>
+    <pubDate>31 July 2026</pubDate>
+    <description>Achieving +145% conversions and 3.8x Return on Ad Spend (ROAS) for a premium interior design firm through structured page layouts and precise search targeting.</description>
+  </item>
+  <item>
+    <title>Ala Hazrat Boutique Digital Transition</title>
+    <link>https://mdtavrej.com/project/?slug=ala-hazrat-boutique</link>
+    <guid>https://mdtavrej.com/project/?slug=ala-hazrat-boutique</guid>
+    <pubDate>30 July 2026</pubDate>
+    <description>Digitizing a physical kids boutique retail store, launching catalog inventory management and integrating WhatsApp commerce structures.</description>
+  </item>
+  <item>
+    <title>GA4 Audit Checklist</title>
+    <link>https://mdtavrej.com/resource/?slug=ga4-audit-checklist</link>
+    <guid>https://mdtavrej.com/resource/?slug=ga4-audit-checklist</guid>
+    <pubDate>31 July 2026</pubDate>
+    <description>A comprehensive step-by-step audit checklist to verify that your Google Analytics 4 data streams, custom events and conversions are tracked correctly.</description>
+  </item>
+</channel>
+</rss>

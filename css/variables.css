@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesque:wght@500;700&family=Montserrat:wght@700;800&family=Fira+Code:wght@400;500&display=swap');
+
+/* ==========================================
+   DESIGN TOKENS & SYSTEM VARIABLES
+   ========================================== */
+
+:root {
+  /* --- Typography System --- */
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Space Grotesque', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  /* Typographic Font Weights */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Typographic Letter Spacings */
+  --ls-tight: -0.02em;
+  --ls-normal: 0em;
+  --ls-wide: 0.05em;
+  --ls-widest: 0.1em;
+
+  /* Typography Scale (Fluid scale using clamp) */
+  --font-size-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);    /* 12px - 13px */
+  --font-size-sm: clamp(0.875rem, 0.84rem + 0.18vw, 0.9375rem);   /* 14px - 15px */
+  --font-size-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);      /* 16px - 17px */
+  --font-size-md: clamp(1.125rem, 1.06rem + 0.3vw, 1.25rem);      /* 18px - 20px */
+  --font-size-lg: clamp(1.25rem, 1.18rem + 0.35vw, 1.4375rem);    /* 20px - 23px */
+  --font-size-xl: clamp(1.5rem, 1.38rem + 0.6vw, 1.875rem);       /* 24px - 30px */
+  --font-size-xxl: clamp(2rem, 1.8rem + 1vw, 2.625rem);           /* 32px - 42px */
+  --font-size-display: clamp(2.5rem, 2.2rem + 1.5vw, 3.5rem);     /* 40px - 56px */
+  --font-size-hero: clamp(3.25rem, 2.85rem + 2vw, 4.75rem);       /* 52px - 76px */
+
+  /* Line Heights */
+  --lh-mono: 1.5;
+  --lh-body: 1.625;
+  --lh-heading: 1.2;
+  --lh-display: 1.1;
+
+  /* --- Spacing System (Mathematical Scale) --- */
+  --space-xxs: clamp(0.25rem, 0.23rem + 0.1vw, 0.3125rem);      /* 4px - 5px */
+  --space-xs: clamp(0.5rem, 0.46rem + 0.2vw, 0.625rem);         /* 8px - 10px */
+  --space-sm: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);        /* 12px - 14px */
+  --space-md: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);             /* 16px - 20px */
+  --space-lg: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);          /* 20px - 24px */
+  --space-xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);        /* 24px - 30px */
+  --space-xxl: clamp(2rem, 1.8rem + 1vw, 2.5rem);               /* 32px - 40px */
+  --space-3xl: clamp(3rem, 2.6rem + 2vw, 4rem);                 /* 48px - 64px */
+  --space-section: clamp(5rem, 4rem + 5vw, 7.5rem);             /* 80px - 120px */
+  --space-hero: clamp(7.5rem, 6rem + 7.5vw, 11rem);             /* 120px - 176px */
+
+  /* --- Container & Layout System --- */
+  --grid-columns: 12;
+  --grid-gap: clamp(1rem, 0.8rem + 1vw, 2rem);
+  --container-max-width: 1320px; /* Reduced to standard premium width */
+  --container-padding: clamp(1.5rem, 1rem + 2.5vw, 3rem);
+
+  /* --- Border Radius --- */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px; /* Enhanced card outline rounding */
+  --radius-full: 9999px;
+
+  /* --- Micro-Interaction Transitions --- */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Aspect Ratios */
+  --ratio-portrait: 3 / 4;
+  --ratio-landscape: 16 / 9;
+  --ratio-square: 1 / 1;
+  --ratio-wide: 21 / 9;
+}
+
+/* ==========================================
+   THEME STYLES (DEFAULT TO DARK / EDITORIAL)
+   ========================================== */
+
+/* Dark Theme Tokens (Default) */
+:root {
+  /* Core Backgrounds & Surfaces */
+  --color-bg-primary: #0a0a0c;
+  --color-bg-secondary: #111115;
+  --color-bg-tertiary: #17171e;
+  
+  /* Text Colors */
+  --color-text-primary: #f8f9fa;
+  --color-text-secondary: #a3a3b1;
+  --color-text-muted: #646473;
+  --color-text-accent: #ffffff;
+  
+  /* Brand/Accent Colors */
+  --color-accent: #ffffff;
+  --color-accent-hover: #e4e4e9;
+  --color-accent-subtle: rgba(255, 255, 255, 0.03);
+  --color-accent-muted: rgba(255, 255, 255, 0.12);
+  
+  /* Borders */
+  --color-border: #1f1f27;
+  --color-border-hover: #32323e;
+  --color-border-skeleton: rgba(255, 255, 255, 0.08);
+  --color-border-skeleton-focus: rgba(255, 255, 255, 0.2);
+  
+  /* Semantic Status Colors (WCAG AAA/AA Compliant Contrast) */
+  --color-success: #2ec4b6;
+  --color-success-bg: rgba(46, 196, 182, 0.1);
+  --color-success-border: rgba(46, 196, 182, 0.2);
+  
+  --color-warning: #ffb703;
+  --color-warning-bg: rgba(255, 183, 3, 0.1);
+  --color-warning-border: rgba(255, 183, 3, 0.2);
+  
+  --color-error: #ff3366;
+  --color-error-bg: rgba(255, 51, 102, 0.1);
+  --color-error-border: rgba(255, 51, 102, 0.2);
+  
+  --color-info: #00b4d8;
+  --color-info-bg: rgba(0, 180, 216, 0.1);
+  --color-info-border: rgba(0, 180, 216, 0.2);
+  
+  /* Shimmers & Inputs */
+  --color-shimmer-start: #111115;
+  --color-shimmer-middle: #1c1c24;
+  --color-shimmer-end: #111115;
+
+  --color-input-bg: #0d0d10;
+  --color-input-focus: #ffffff;
+
+  /* Shadows System (Refined Dark Mode paper-depth) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 24px rgba(255, 255, 255, 0.02);
+  
+  color-scheme: dark;
+}
+
+/* Light Theme Tokens */
+[data-theme="light"] {
+  /* Core Backgrounds & Surfaces */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f6f6f9;
+  --color-bg-tertiary: #eeeef2;
+  
+  /* Text Colors */
+  --color-text-primary: #121215;
+  --color-text-secondary: #565666;
+  --color-text-muted: #8e8e9c;
+  --color-text-accent: #000000;
+  
+  /* Brand/Accent Colors */
+  --color-accent: #000000;
+  --color-accent-hover: #1f1f24;
+  --color-accent-subtle: rgba(0, 0, 0, 0.03);
+  --color-accent-muted: rgba(0, 0, 0, 0.1);
+  
+  /* Borders */
+  --color-border: #e2e2e8;
+  --color-border-hover: #c9c9d4;
+  --color-border-skeleton: rgba(0, 0, 0, 0.06);
+  --color-border-skeleton-focus: rgba(0, 0, 0, 0.15);
+  
+  /* Semantic Status Colors (WCAG AAA/AA Compliant Contrast) */
+  --color-success: #0f9f90;
+  --color-success-bg: rgba(15, 159, 144, 0.08);
+  --color-success-border: rgba(15, 159, 144, 0.15);
+  
+  --color-warning: #d97706;
+  --color-warning-bg: rgba(217, 119, 6, 0.08);
+  --color-warning-border: rgba(217, 119, 6, 0.15);
+  
+  --color-error: #dc2626;
+  --color-error-bg: rgba(220, 38, 38, 0.08);
+  --color-error-border: rgba(220, 38, 38, 0.15);
+  
+  --color-info: #0284c7;
+  --color-info-bg: rgba(2, 132, 199, 0.08);
+  --color-info-border: rgba(2, 132, 199, 0.15);
+  
+  /* Shimmers & Inputs */
+  --color-shimmer-start: #eeeef2;
+  --color-shimmer-middle: #e2e2e8;
+  --color-shimmer-end: #eeeef2;
+
+  --color-input-bg: #fdfdfd;
+  --color-input-focus: #000000;
+
+  /* Shadows System (Refined Light Mode paper-depth) */
+  --shadow-sm: 0 1px 2px rgba(18, 18, 21, 0.05);
+  --shadow-md: 0 4px 12px rgba(18, 18, 21, 0.05), 0 2px 4px rgba(18, 18, 21, 0.03);
+  --shadow-lg: 0 12px 24px rgba(18, 18, 21, 0.08), 0 4px 8px rgba(18, 18, 21, 0.04);
+  --shadow-glow: 0 0 24px rgba(0, 0, 0, 0.01);
+  
+  color-scheme: light;
+}
