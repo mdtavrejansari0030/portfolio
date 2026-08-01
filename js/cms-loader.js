@@ -1,15 +1,18 @@
 // Client-Side CMS Content Loader Engine
 
+// Helper to determine relative path prefix to the root directory
+const getPrefix = () => {
+  const pathLower = window.location.pathname.toLowerCase();
+  const subdirs = ['/article', '/project', '/case-study', '/resource', '/articles', '/projects', '/case-studies', '/resources', '/about', '/contact', '/admin'];
+  const isSubdir = subdirs.some(dir => pathLower.includes(dir + '/') || pathLower.endsWith(dir) || pathLower.endsWith(dir + '/index.html'));
+  return isSubdir ? '../' : './';
+};
+const prefix = getPrefix();
+
 // Relative path to JSON DB (fallback if local API is unreachable)
 const API_BASE = (window.location.protocol === 'file:' || window.location.port !== '8080') ? 'http://localhost:8080' : '';
 const DB_URL = API_BASE + '/api/content';
-const getFallbackDbUrl = () => {
-  const pathLower = window.location.pathname.toLowerCase();
-  const subdirs = ['/article', '/project', '/case-study', '/resource', '/articles', '/projects', '/case-studies', '/resources'];
-  const isSubdir = subdirs.some(dir => pathLower.includes(dir + '/') || pathLower.endsWith(dir) || pathLower.endsWith(dir + '/index.html'));
-  return isSubdir ? '../data/db.json' : 'data/db.json';
-};
-const FALLBACK_DB_URL = getFallbackDbUrl();
+const FALLBACK_DB_URL = `${prefix}data/db.json`;
 
 let cmsDatabase = { content: [], settings: {} };
 
@@ -234,10 +237,10 @@ function hydrateHomepage(items) {
     homeRecentlyUpdated.innerHTML = '';
     recentlyUpdated.slice(0, 4).forEach(item => {
       let route = '';
-      if (item.type === 'articles') route = '/article';
-      else if (item.type === 'projects') route = '/project';
-      else if (item.type === 'case_studies') route = '/case-study';
-      else if (item.type === 'resources') route = '/resource';
+      if (item.type === 'articles') route = `${prefix}article`;
+      else if (item.type === 'projects') route = `${prefix}project`;
+      else if (item.type === 'case_studies') route = `${prefix}case-study`;
+      else if (item.type === 'resources') route = `${prefix}resource`;
       
       const div = document.createElement('div');
       div.className = 'col-span-12 col-span-6'
@@ -262,7 +265,7 @@ function hydrateHomepage(items) {
     homeArticles.innerHTML = '';
     if (list.length === 0) homeArticles.innerHTML = '<div class="col-span-12" style="text-align: center; color: var(--color-text-muted);">No articles found</div>';
     list.forEach(item => {
-      homeArticles.appendChild(createItemCard(item, '/article'));
+      homeArticles.appendChild(createItemCard(item, `${prefix}article`));
     });
   }
 
@@ -273,7 +276,7 @@ function hydrateHomepage(items) {
     homeProjects.innerHTML = '';
     if (list.length === 0) homeProjects.innerHTML = '<div class="col-span-12" style="text-align: center; color: var(--color-text-muted);">No projects found</div>';
     list.forEach(item => {
-      homeProjects.appendChild(createItemCard(item, '/project'));
+      homeProjects.appendChild(createItemCard(item, `${prefix}project`));
     });
   }
 
@@ -284,7 +287,7 @@ function hydrateHomepage(items) {
     homeCaseStudies.innerHTML = '';
     if (list.length === 0) homeCaseStudies.innerHTML = '<div class="col-span-12" style="text-align: center; color: var(--color-text-muted);">No case studies found</div>';
     list.forEach(item => {
-      homeCaseStudies.appendChild(createItemCard(item, '/case-study'));
+      homeCaseStudies.appendChild(createItemCard(item, `${prefix}case-study`));
     });
   }
 
@@ -295,7 +298,7 @@ function hydrateHomepage(items) {
     homeResources.innerHTML = '';
     if (list.length === 0) homeResources.innerHTML = '<div class="col-span-12" style="text-align: center; color: var(--color-text-muted);">No resources found</div>';
     list.forEach(item => {
-      homeResources.appendChild(createItemCard(item, '/resource'));
+      homeResources.appendChild(createItemCard(item, `${prefix}resource`));
     });
   }
 }
@@ -330,10 +333,10 @@ function hydrateListContainer(type, items) {
     }
 
     let route = '';
-    if (type === 'articles') route = '/article';
-    else if (type === 'projects') route = '/project';
-    else if (type === 'case_studies') route = '/case-study';
-    else if (type === 'resources') route = '/resource';
+    if (type === 'articles') route = `${prefix}article`;
+    else if (type === 'projects') route = `${prefix}project`;
+    else if (type === 'case_studies') route = `${prefix}case-study`;
+    else if (type === 'resources') route = `${prefix}resource`;
 
     filtered.forEach(item => {
       container.appendChild(createItemCard(item, route));
@@ -385,9 +388,9 @@ function hydrateDetailContainer(type, container, items) {
     <!-- Details Header Banner -->
     <div style="margin-bottom: var(--space-lg);" class="flow flow-xs">
       <div class="breadcrumbs">
-        <a href="/">Home</a>
+        <a href="${prefix}">Home</a>
         <span class="breadcrumbs-separator"></span>
-        <a href="/${type.replace(/_/g, '-')}/">${type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</a>
+        <a href="${prefix}${type.replace(/_/g, '-')}/">${type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</a>
         <span class="breadcrumbs-separator"></span>
         <span>Detail</span>
       </div>
@@ -442,10 +445,10 @@ function hydrateRelatedContent(currentItem, allItems, relatedGrid) {
   }
 
   let route = '';
-  if (currentItem.type === 'articles') route = '/article';
-  else if (currentItem.type === 'projects') route = '/project';
-  else if (currentItem.type === 'case_studies') route = '/case-study';
-  else if (currentItem.type === 'resources') route = '/resource';
+  if (currentItem.type === 'articles') route = `${prefix}article`;
+  else if (currentItem.type === 'projects') route = `${prefix}project`;
+  else if (currentItem.type === 'case_studies') route = `${prefix}case-study`;
+  else if (currentItem.type === 'resources') route = `${prefix}resource`;
 
   related.slice(0, 3).forEach(item => {
     relatedGrid.appendChild(createItemCard(item, route));

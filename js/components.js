@@ -2,10 +2,19 @@
  * Reusable Components and Layout Shell Controls
  */
 
+// Helper to determine the relative prefix to the root directory
+function getPrefix() {
+  const pathLower = window.location.pathname.toLowerCase();
+  const subdirs = ['/article', '/project', '/case-study', '/resource', '/articles', '/projects', '/case-studies', '/resources', '/about', '/contact', '/admin'];
+  const isSubdir = subdirs.some(dir => pathLower.includes(dir + '/') || pathLower.endsWith(dir) || pathLower.endsWith(dir + '/index.html'));
+  return isSubdir ? '../' : './';
+}
+
 // 1. REUSABLE GLOBAL NAVBAR COMPONENT
 class GlobalNavbar extends HTMLElement {
   connectedCallback() {
     const currentPath = window.location.pathname;
+    const prefix = getPrefix();
     
     // Determine active tab based on clean path matching
     const isHome = currentPath === '/' || currentPath.endsWith('/index.html') || 
@@ -27,7 +36,7 @@ class GlobalNavbar extends HTMLElement {
     this.innerHTML = `
       <header class="header-navbar">
         <div class="container navbar-container">
-          <a href="/" class="nav-logo" aria-label="Md Tavrej Ansari Portfolio Home" style="font-family: var(--font-heading); font-weight: 700; font-size: var(--font-size-md); text-decoration: none; color: var(--color-text-primary); border: 1px solid var(--color-border); padding: var(--space-xxs) var(--space-sm); border-radius: var(--radius-sm); letter-spacing: 0.05em; display: inline-block;">
+          <a href="${prefix}" class="nav-logo" aria-label="Md Tavrej Ansari Portfolio Home" style="font-family: var(--font-heading); font-weight: 700; font-size: var(--font-size-md); text-decoration: none; color: var(--color-text-primary); border: 1px solid var(--color-border); padding: var(--space-xxs) var(--space-sm); border-radius: var(--radius-sm); letter-spacing: 0.05em; display: inline-block;">
             MTA.
           </a>
 
@@ -39,14 +48,15 @@ class GlobalNavbar extends HTMLElement {
 
           <nav class="nav-menu" id="nav-menu" aria-label="Main Navigation">
             <ul class="nav-list">
-              <li><a href="/" class="nav-link ${isHome ? 'active' : ''}">Home</a></li>
-              <li><a href="/projects" class="nav-link ${isProjects ? 'active' : ''}">Work</a></li>
-              <li><a href="/case-studies" class="nav-link ${isCaseStudies ? 'active' : ''}">Case Studies</a></li>
-              <li><a href="/articles" class="nav-link ${isArticles ? 'active' : ''}">Insights</a></li>
-              <li><a href="/resources" class="nav-link ${isResources ? 'active' : ''}">Portfolio</a></li>
-              <li><a href="/about" class="nav-link ${isAbout ? 'active' : ''}">About</a></li>
-              <li><a href="/contact" class="nav-link ${isContact ? 'active' : ''}">Get in Touch</a></li>
+              <li><a href="${prefix}" class="nav-link ${isHome ? 'active' : ''}">Home</a></li>
+              <li><a href="${prefix}projects/" class="nav-link ${isProjects ? 'active' : ''}">Work</a></li>
+              <li><a href="${prefix}case-studies/" class="nav-link ${isCaseStudies ? 'active' : ''}">Case Studies</a></li>
+              <li><a href="${prefix}articles/" class="nav-link ${isArticles ? 'active' : ''}">Insights</a></li>
+              <li><a href="${prefix}resources/" class="nav-link ${isResources ? 'active' : ''}">Portfolio</a></li>
+              <li><a href="${prefix}about/" class="nav-link ${isAbout ? 'active' : ''}">About</a></li>
+              <li><a href="${prefix}contact/" class="nav-link ${isContact ? 'active' : ''}">Get in Touch</a></li>
             </ul>
+
 
             <div class="nav-actions">
               <button class="btn btn-secondary btn-icon theme-toggle" aria-label="Toggle Color Theme" title="Toggle Theme">
@@ -65,7 +75,7 @@ class GlobalNavbar extends HTMLElement {
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
               </button>
-              <a href="/contact" class="btn btn-primary" aria-label="Book Strategy Call">
+              <a href="${prefix}contact/" class="btn btn-primary" aria-label="Book Strategy Call">
                 Book Strategy Call
               </a>
             </div>
@@ -168,6 +178,7 @@ customElements.define('global-navbar', GlobalNavbar);
 // 2. REUSABLE GLOBAL FOOTER COMPONENT
 class GlobalFooter extends HTMLElement {
   connectedCallback() {
+    const prefix = getPrefix();
     this.innerHTML = `
       <footer class="global-footer" aria-label="Site Footer">
         <div class="container">
@@ -200,19 +211,19 @@ class GlobalFooter extends HTMLElement {
             <nav class="footer-nav-col" aria-label="Footer Navigation Links">
               <h3 class="footer-nav-title">Navigation</h3>
               <ul class="footer-links-list">
-                <li><a href="/" class="footer-link">Home</a></li>
-                <li><a href="/projects" class="footer-link">Work</a></li>
-                <li><a href="/case-studies" class="footer-link">Case Studies</a></li>
-                <li><a href="/articles" class="footer-link">Insights</a></li>
+                <li><a href="${prefix}" class="footer-link">Home</a></li>
+                <li><a href="${prefix}projects/" class="footer-link">Work</a></li>
+                <li><a href="${prefix}case-studies/" class="footer-link">Case Studies</a></li>
+                <li><a href="${prefix}articles/" class="footer-link">Insights</a></li>
               </ul>
             </nav>
-
+ 
             <nav class="footer-nav-col" aria-label="Footer Secondary Links">
               <h3 class="footer-nav-title">Explore</h3>
               <ul class="footer-links-list">
-                <li><a href="/resources" class="footer-link">Portfolio</a></li>
-                <li><a href="/about" class="footer-link">About</a></li>
-                <li><a href="/contact" class="footer-link">Get in Touch</a></li>
+                <li><a href="${prefix}resources/" class="footer-link">Portfolio</a></li>
+                <li><a href="${prefix}about/" class="footer-link">About</a></li>
+                <li><a href="${prefix}contact/" class="footer-link">Get in Touch</a></li>
               </ul>
             </nav>
 
